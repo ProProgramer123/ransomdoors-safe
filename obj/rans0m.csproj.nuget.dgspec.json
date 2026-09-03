@@ -1,37 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj": {}
+    "/workspaces/ransomdoors-safe/rans0m.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj": {
+    "/workspaces/ransomdoors-safe/rans0m.csproj": {
       "version": "1.0.1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj",
+        "projectUniqueName": "/workspaces/ransomdoors-safe/rans0m.csproj",
         "projectName": "ransom",
-        "projectPath": "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj",
-        "packagesPath": "C:\\Users\\Ixar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ixar\\Desktop\\ransomdoors\\obj\\",
+        "projectPath": "/workspaces/ransomdoors-safe/rans0m.csproj",
+        "packagesPath": "/home/codespace/.nuget/packages/",
+        "outputPath": "/workspaces/ransomdoors-safe/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ixar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/codespace/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net10.0-windows": {
-            "framework": "net10.0-windows7.0",
+          "net10.0-windows7.0": {
             "targetAlias": "net10.0-windows",
             "projectReferences": {}
           }
@@ -46,11 +38,10 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
-        "net10.0-windows": {
-          "framework": "net10.0-windows7.0",
+        "net10.0-windows7.0": {
           "targetAlias": "net10.0-windows",
           "dependencies": {
             "NAudio": {
@@ -69,6 +60,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[10.0.4, 10.0.4]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -77,14 +74,14 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.200/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
             "Microsoft.Win32.Primitives": "(,4.3.32767]",
             "Microsoft.Win32.Registry": "(,5.0.32767]",
-            "Microsoft.Win32.Registry.AccessControl": "(,10.0.32767]",
-            "Microsoft.Win32.SystemEvents": "(,10.0.32767]",
+            "Microsoft.Win32.Registry.AccessControl": "(,9.0.32767]",
+            "Microsoft.Win32.SystemEvents": "(,9.0.32767]",
             "runtime.any.System.Collections": "(,4.3.32767]",
             "runtime.any.System.Diagnostics.Tools": "(,4.3.32767]",
             "runtime.any.System.Diagnostics.Tracing": "(,4.3.32767]",
@@ -225,7 +222,7 @@
             "runtime.win8-arm.runtime.native.System.IO.Compression": "(,4.3.32767]",
             "System.AppContext": "(,4.3.32767]",
             "System.Buffers": "(,5.0.32767]",
-            "System.CodeDom": "(,10.0.32767]",
+            "System.CodeDom": "(,9.0.32767]",
             "System.Collections": "(,4.3.32767]",
             "System.Collections.Concurrent": "(,4.3.32767]",
             "System.Collections.Immutable": "(,10.0.32767]",
@@ -236,28 +233,27 @@
             "System.ComponentModel.EventBasedAsync": "(,4.3.32767]",
             "System.ComponentModel.Primitives": "(,4.3.32767]",
             "System.ComponentModel.TypeConverter": "(,4.3.32767]",
-            "System.Configuration.ConfigurationManager": "(,10.0.32767]",
+            "System.Configuration.ConfigurationManager": "(,9.0.32767]",
             "System.Console": "(,4.3.32767]",
             "System.Data.Common": "(,4.3.32767]",
             "System.Data.DataSetExtensions": "(,4.4.32767]",
             "System.Diagnostics.Contracts": "(,4.3.32767]",
             "System.Diagnostics.Debug": "(,4.3.32767]",
             "System.Diagnostics.DiagnosticSource": "(,10.0.32767]",
-            "System.Diagnostics.EventLog": "(,10.0.32767]",
+            "System.Diagnostics.EventLog": "(,9.0.32767]",
             "System.Diagnostics.FileVersionInfo": "(,4.3.32767]",
-            "System.Diagnostics.PerformanceCounter": "(,10.0.32767]",
+            "System.Diagnostics.PerformanceCounter": "(,9.0.32767]",
             "System.Diagnostics.Process": "(,4.3.32767]",
             "System.Diagnostics.StackTrace": "(,4.3.32767]",
             "System.Diagnostics.TextWriterTraceListener": "(,4.3.32767]",
             "System.Diagnostics.Tools": "(,4.3.32767]",
             "System.Diagnostics.TraceSource": "(,4.3.32767]",
             "System.Diagnostics.Tracing": "(,4.3.32767]",
-            "System.DirectoryServices": "(,10.0.32767]",
-            "System.Drawing.Common": "(,10.0.32767]",
+            "System.DirectoryServices": "(,9.0.32767]",
+            "System.Drawing.Common": "(,9.0.32767]",
             "System.Drawing.Primitives": "(,4.3.32767]",
             "System.Dynamic.Runtime": "(,4.3.32767]",
             "System.Formats.Asn1": "(,10.0.32767]",
-            "System.Formats.Nrbf": "(,10.0.32767]",
             "System.Formats.Tar": "(,10.0.32767]",
             "System.Globalization": "(,4.3.32767]",
             "System.Globalization.Calendars": "(,4.3.32767]",
@@ -272,7 +268,7 @@
             "System.IO.FileSystem.Watcher": "(,4.3.32767]",
             "System.IO.IsolatedStorage": "(,4.3.32767]",
             "System.IO.MemoryMappedFiles": "(,4.3.32767]",
-            "System.IO.Packaging": "(,10.0.32767]",
+            "System.IO.Packaging": "(,9.0.32767]",
             "System.IO.Pipelines": "(,10.0.32767]",
             "System.IO.Pipes": "(,4.3.32767]",
             "System.IO.Pipes.AccessControl": "(,5.0.32767]",
@@ -309,7 +305,7 @@
             "System.Reflection.Metadata": "(,10.0.32767]",
             "System.Reflection.Primitives": "(,4.3.32767]",
             "System.Reflection.TypeExtensions": "(,4.3.32767]",
-            "System.Resources.Extensions": "(,10.0.32767]",
+            "System.Resources.Extensions": "(,9.0.32767]",
             "System.Resources.Reader": "(,4.3.32767]",
             "System.Resources.ResourceManager": "(,4.3.32767]",
             "System.Resources.Writer": "(,4.3.32767]",
@@ -333,12 +329,12 @@
             "System.Security.Cryptography.Csp": "(,4.3.32767]",
             "System.Security.Cryptography.Encoding": "(,4.3.32767]",
             "System.Security.Cryptography.OpenSsl": "(,5.0.32767]",
-            "System.Security.Cryptography.Pkcs": "(,10.0.32767]",
+            "System.Security.Cryptography.Pkcs": "(,9.0.32767]",
             "System.Security.Cryptography.Primitives": "(,4.3.32767]",
-            "System.Security.Cryptography.ProtectedData": "(,10.0.32767]",
+            "System.Security.Cryptography.ProtectedData": "(,9.0.32767]",
             "System.Security.Cryptography.X509Certificates": "(,4.3.32767]",
-            "System.Security.Cryptography.Xml": "(,10.0.32767]",
-            "System.Security.Permissions": "(,10.0.32767]",
+            "System.Security.Cryptography.Xml": "(,9.0.32767]",
+            "System.Security.Permissions": "(,9.0.32767]",
             "System.Security.Principal": "(,4.3.32767]",
             "System.Security.Principal.Windows": "(,5.0.32767]",
             "System.Security.SecureString": "(,4.3.32767]",
@@ -360,7 +356,7 @@
             "System.Threading.ThreadPool": "(,4.3.32767]",
             "System.Threading.Timer": "(,4.3.32767]",
             "System.ValueTuple": "(,4.5.32767]",
-            "System.Windows.Extensions": "(,10.0.32767]",
+            "System.Windows.Extensions": "(,9.0.32767]",
             "System.Xml.ReaderWriter": "(,4.3.32767]",
             "System.Xml.XDocument": "(,4.3.32767]",
             "System.Xml.XmlDocument": "(,4.3.32767]",
