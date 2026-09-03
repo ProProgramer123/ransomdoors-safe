@@ -1,5 +1,3 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Security.Principal;
 
 namespace rans0m
@@ -7,10 +5,9 @@ namespace rans0m
     public class Global
     {
         // ----------------------------- CONFIGURATION -----------------------------
-        public static readonly int minRansomTime = 26*3; // In seconds (duration of a ransom attack because else you can have two at the same time and i don't have time to fix it correctly rn)
-        public static readonly int maxRansomTime = 10*60; // In seconds
+        public static readonly int minRansomTime = 26 * 3;
+        public static readonly int maxRansomTime = 10 * 60;
 
-        // Titles used by the pop up windows
         public static readonly List<string> tauntTitles = new() {
             "RANS0M",
             "MOSNAR",
@@ -29,7 +26,6 @@ namespace rans0m
             "_________"
         };
 
-        // Images used by the pop up windows
         public static readonly List<Bitmap> tauntImages = new() {
             Properties.Resources.glitch,
             Properties.Resources.idiot,
@@ -41,12 +37,7 @@ namespace rans0m
             Properties.Resources.taunt3,
         };
 
-
-
-
-
         // -------------------------- GLOBAL VARIABLES --------------------------
-
         public static int ransomLeft = 0;
         public static bool underRansom = false;
         public static Action? RansomPayed;
@@ -58,72 +49,15 @@ namespace rans0m
         public static Random rng = new Random();
         public static Rectangle screenBounds = Screen.PrimaryScreen.WorkingArea;
 
-
-        
-
-
-
-
         // -------------------------- PUBLIC METHODS --------------------------
-
         public static void KeyPressed(Keys key)
-        { 
-            if (spyingMouse) {
-                lastRegisteredMousePos = new Point(-1, -1); // Invalidate the last registered mouse position if a key is pressed during the spy phase so it also triggers the ransom
-            }
-        }
-
-        /// <returns>true if the application is started as administrator</returns>
-        public static bool IsAdministrator()
         {
-            return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
-        }
-
-        /// <summary>
-        /// Tries to restart the process as admin
-        /// </summary>
-        public static void AttemptForceAdmin()
-        {
-            if (!Global.IsAdministrator()) // If process not ran as admin
+            if (spyingMouse)
             {
-                try
-                {
-                    var proc = new Process
-                    {
-                        StartInfo =
-                    {
-                        FileName = Process.GetCurrentProcess().MainModule.FileName,
-                        UseShellExecute = true,
-                        Verb = "runas"
-                    }
-                    };
-
-                    proc.Start(); // Start new process as admin
-                    Process.GetCurrentProcess().Kill(); // Kill current process
-                }
-                catch {
-                    //MessageBox.Show("RANS0M requires admin privileges.", "RANS0M");
-                    //Process.GetCurrentProcess().Kill(); // Kill process
-                    // Not forcing admin anymore since I can just shutdown the computer without admin privileges
-                }
+                lastRegisteredMousePos = new Point(-1, -1);
             }
         }
 
-        /// <summary>
-        /// Transforms the process into a critical process, which will cause a BSOD if it is killed
-        /// </summary>
-        public static void IntoCriticalProcess()
-        {
-            [DllImport("ntdll.dll", SetLastError = true)]
-            static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass, ref int processInformation, int processInformationLength);
-            int isCritical = 1;
-            int BreakOnTermination = 0x1D;  // flag BreakOnTermination
-            NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-        }
-
-        /// <summary>
-        /// Randomly positions a control within the screen bounds.
-        /// </summary>
         public static void RandomPosControl(Control control)
         {
             int x = Global.rng.Next(0, Global.screenBounds.Width - control.Width);
@@ -132,18 +66,14 @@ namespace rans0m
             control.Location = new Point(x, y);
         }
 
-        /// <summary>
-        /// Centers a control within the screen bounds.
-        /// </summary>
         public static void CenterControl(Control control)
         {
-            control.Location = new Point((Global.screenBounds.Width / 2) - control.Width / 2, (Global.screenBounds.Height / 2) - control.Height / 2);
+            control.Location = new Point(
+                (Global.screenBounds.Width / 2) - control.Width / 2,
+                (Global.screenBounds.Height / 2) - control.Height / 2);
         }
 
-        /// <summary>
-        /// Cool glitch idle animation, used for the ransom pop ups
-        /// </summary>
-        public async static void GlitchIdle(Control control, bool divideAndTaunt=false)
+        public async static void GlitchIdle(Control control, bool divideAndTaunt = false)
         {
             int x = control.Location.X;
             int y = control.Location.Y;
@@ -163,25 +93,22 @@ namespace rans0m
 
                     control.Invoke((MethodInvoker)delegate
                     {
-                        if (divideAndTaunt)
+                        if (divideAndTaunt && Global.rng.Next(1, 100) <= 2)
                         {
-                            if (Global.rng.Next(1, 100) <= 2) // 2% chance that the control teleports somewhere else and spawns a TauntWindow
-                            {
-                                x = Global.rng.Next(0, Global.screenBounds.Width - control.Width);
-                                y = Global.rng.Next(0, Global.screenBounds.Height - control.Height);
+                            x = Global.rng.Next(0, Global.screenBounds.Width - control.Width);
+                            y = Global.rng.Next(0, Global.screenBounds.Height - control.Height);
 
-                                TauntWindow tauntWindow = new TauntWindow();
-                                tauntWindow.Show();
-                            }
+                            TauntWindow tauntWindow = new TauntWindow();
+                            tauntWindow.Show();
                         }
 
-                        // Sets random position
-                        control.Location = new Point(x + Global.rng.Next(-5, 5), y + Global.rng.Next(-5, 5));
+                        control.Location = new Point(
+                            x + Global.rng.Next(-5, 5),
+                            y + Global.rng.Next(-5, 5));
                     });
                 }
                 catch { break; }
             }
         }
-
     }
 }
