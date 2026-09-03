@@ -8,65 +8,58 @@ namespace rans0m
     public static class GoldCoinManager
     {
         private const string RegistryValueName = "GoldCoins";
-        private const string GoldFolderName = "RANS0M Gold Coins";
 
         /// <summary>
-        /// Gets the predictable folder where the current ransom's .gold files are created.
-        /// Keeping the location predictable makes the safe recreation much easier to use.
-        /// </summary>
-        public static string GetGoldCoinDirectory()
-        {
-            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            if (string.IsNullOrWhiteSpace(desktop))
-                desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            if (string.IsNullOrWhiteSpace(desktop))
-                desktop = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-            return Path.Combine(desktop, GoldFolderName);
-        }
-
-        /// <summary>
-        /// Creates the requested number of .gold files in a predictable folder on the user's Desktop.
-        /// Each file contains an encrypted JSON object: {"RANSOM_COIN":"randomString"}.
-        /// Paths are stored in the registry for later deletion.
+        /// Creates .gold files in randomly selected user folders/subfolders.
+        /// The safe version never writes outside the current user's profile.
         /// </summary>
         public static int CreateRandomCoins(int count)
         {
             if (count <= 0)
                 return 0;
 
-            string targetDir = GetGoldCoinDirectory();
-            Directory.CreateDirectory(targetDir);
+            List<string> baseDirs = GetUserDirectories();
+            if (baseDirs.Count == 0)
+                return 0;
 
             List<string> createdPaths = new List<string>();
 
             for (int i = 0; i < count; i++)
             {
-                try
+                bool created = false;
+
+                for (int attempt = 0; attempt < baseDirs.Count * 3 && !created; attempt++)
                 {
-                    string randomString = Guid.NewGuid().ToString("N");
-                    Dictionary<string, string> payload = new Dictionary<string, string>
+                    try
                     {
-                        { "RANSOM_COIN", randomString }
-                    };
+                        string baseDir = baseDirs[Global.rng.Next(baseDirs.Count)];
+                        string targetDir = GetRandomSubfolder(baseDir);
+                        Directory.CreateDirectory(targetDir);
 
-                    string json = JsonSerializer.Serialize(payload);
-                    byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
-                    byte[] encrypted = ProtectedData.Protect(
-                        jsonBytes,
-                        null,
-                        DataProtectionScope.CurrentUser);
+                        string randomString = Guid.NewGuid().ToString("N");
+                        Dictionary<string, string> payload = new Dictionary<string, string>
+                        {
+                            { "RANSOM_COIN", randomString }
+                        };
 
-                    string fileName = $"{Guid.NewGuid():N}.gold";
-                    string fullPath = Path.Combine(targetDir, fileName);
+                        string json = JsonSerializer.Serialize(payload);
+                        byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
+                        byte[] encrypted = ProtectedData.Protect(
+                            jsonBytes,
+                            null,
+                            DataProtectionScope.CurrentUser);
 
-                    File.WriteAllBytes(fullPath, encrypted);
-                    createdPaths.Add(fullPath);
-                }
-                catch
-                {
-                    // Keep creating the remaining coins if one file fails.
+                        string fileName = $"{Guid.NewGuid():N}.gold";
+                        string fullPath = Path.Combine(targetDir, fileName);
+
+                        File.WriteAllBytes(fullPath, encrypted);
+                        createdPaths.Add(fullPath);
+                        created = true;
+                    }
+                    catch
+                    {
+                        // Try another random user location.
+                    }
                 }
             }
 
@@ -92,21 +85,6 @@ namespace rans0m
                 }
             }
 
-            // Also clean up any .gold files left in the predictable game folder.
-            try
-            {
-                string folder = GetGoldCoinDirectory();
-                if (Directory.Exists(folder))
-                {
-                    foreach (string file in Directory.EnumerateFiles(folder, "*.gold"))
-                    {
-                        try { File.Delete(file); }
-                        catch { }
-                    }
-                }
-            }
-            catch { }
-
             using (RegistryKey? key = Registry.CurrentUser.CreateSubKey(@"Software\RANSOM"))
             {
                 key?.DeleteValue(RegistryValueName, false);
@@ -127,6 +105,58 @@ namespace rans0m
 
             return JsonSerializer.Deserialize<Dictionary<string, string>>(json)
                 ?? throw new InvalidDataException("Invalid .gold file.");
+        }
+
+        private static List<string> GetUserDirectories()
+        {
+            var dirs = new List<string>();
+
+            Environment.SpecialFolder[] specialFolders =
+            {
+                Environment.SpecialFolder.Desktop,
+                Environment.SpecialFolder.MyDocuments,
+                Environment.SpecialFolder.MyPictures,
+                Environment.SpecialFolder.MyMusic,
+                Environment.SpecialFolder.MyVideos,
+                Environment.SpecialFolder.UserProfile
+            };
+
+            foreach (Environment.SpecialFolder sf in specialFolders)
+            {
+                try
+                {
+                    string path = Environment.GetFolderPath(sf);
+                    if (!string.IsNullOrWhiteSpace(path) && Directory.Exists(path))
+                        dirs.Add(path);
+                }
+                catch { }
+            }
+
+            try
+            {
+                string downloads = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                    "Downloads");
+
+                if (Directory.Exists(downloads))
+                    dirs.Add(downloads);
+            }
+            catch { }
+
+            return dirs.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+        }
+
+        private static string GetRandomSubfolder(string root)
+        {
+            try
+            {
+                string[] subDirs = Directory.GetDirectories(root);
+                if (subDirs.Length > 0)
+                    return subDirs[Global.rng.Next(subDirs.Length)];
+            }
+            catch { }
+
+            return root;
         }
 
         private static void AppendToRegistryList(IEnumerable<string> newPaths)
