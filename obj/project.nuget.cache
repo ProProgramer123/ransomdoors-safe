@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yTI905L0YBA=",
+  "dgSpecHash": "nJZAPu3aOJQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ixar\\Desktop\\aaaa\\rans0m\\rans0m.csproj",
+  "projectFilePath": "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ixar\\.nuget\\packages\\naudio\\3.0.1\\naudio.3.0.1.nupkg.sha512",
     "C:\\Users\\Ixar\\.nuget\\packages\\naudio.asio\\3.0.1\\naudio.asio.3.0.1.nupkg.sha512",

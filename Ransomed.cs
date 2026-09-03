@@ -9,6 +9,12 @@ namespace rans0m
 
         public Ransomed() { InitializeComponent(); }
 
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            DragDropFix.Allow(this.Handle);
+        }
+
         private void Ransomed_Load(object sender, EventArgs e)
         {
             // Init the window

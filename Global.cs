@@ -7,7 +7,7 @@ namespace rans0m
     public class Global
     {
         // ----------------------------- CONFIGURATION -----------------------------
-        public static readonly int minRansomTime = 30; // In seconds
+        public static readonly int minRansomTime = 26*3; // In seconds (duration of a ransom attack because else you can have two at the same time and i don't have time to fix it correctly rn)
         public static readonly int maxRansomTime = 10*60; // In seconds
 
         // Titles used by the pop up windows

@@ -11,7 +11,7 @@ namespace rans0m
             Application.ThreadException += (sender, e) => { }; // don't let a random exception kill the whole app
 
             ApplicationConfiguration.Initialize();
-            Global.AttemptForceAdmin();
+            // Global.AttemptForceAdmin(); Disabled for now, cause when the app is run as admin, it won't be able to accept drag&drop
 
             keyboardHook.KeyPressed += Global.KeyPressed;
             keyboardHook.Hook();

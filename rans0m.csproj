@@ -10,6 +10,7 @@
     <PackageIcon>stop_sign.png</PackageIcon>
     <AssemblyName>ransom</AssemblyName>
     <ApplicationIcon>main_ico.ico</ApplicationIcon>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

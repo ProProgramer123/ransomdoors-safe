@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v10.0": {},
     ".NETCoreApp,Version=v10.0/win-x64": {
-      "ransom/1.0.0": {
+      "ransom/1.0.1": {
         "dependencies": {
           "NAudio": "3.0.1"
         },
@@ -121,7 +121,7 @@
     }
   },
   "libraries": {
-    "ransom/1.0.0": {
+    "ransom/1.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ixar\\Desktop\\aaaa\\rans0m\\rans0m.csproj": {}
+    "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ixar\\Desktop\\aaaa\\rans0m\\rans0m.csproj": {
-      "version": "1.0.0",
+    "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj": {
+      "version": "1.0.1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ixar\\Desktop\\aaaa\\rans0m\\rans0m.csproj",
+        "projectUniqueName": "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj",
         "projectName": "ransom",
-        "projectPath": "C:\\Users\\Ixar\\Desktop\\aaaa\\rans0m\\rans0m.csproj",
+        "projectPath": "C:\\Users\\Ixar\\Desktop\\ransomdoors\\rans0m.csproj",
         "packagesPath": "C:\\Users\\Ixar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ixar\\Desktop\\aaaa\\rans0m\\obj\\publish\\win-x64\\",
+        "outputPath": "C:\\Users\\Ixar\\Desktop\\ransomdoors\\obj\\publish\\win-x64\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
